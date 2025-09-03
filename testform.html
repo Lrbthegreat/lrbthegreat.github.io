@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Medication Administration Skill — Reflection & QA Form</title>
+        <!-- build in CSS -->
+        <style>
+
+            :root{
+            --bg: #0f172a; /* page background */
+            --panel: #111827; /* card background */
+            --muted: #94a3b8; /* secondary text */
+            --text: #e5e7eb; /* primary text */
+            --brand: #60a5fa; /* accent color */
+            --brand-2:#34d399; /* secondary accent */
+            --error: #f87171;
+            --ok: #22c55e;
+            --border: #1f2937;
+            }
+
+
+            html,body{height:100%}
+            body{
+            margin:0; font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+            background: radial-gradient(1200px 800px at 10% -10%, rgba(96,165,250,.15), transparent 60%),
+            radial-gradient(900px 600px at 110% -20%, rgba(52,211,153,.12), transparent 50%),
+            var(--bg);
+            color: var(--text);
+            }
+
+
+            .container{max-width: 980px; margin: 40px auto; padding: 0 16px;}
+
+
+            .card{
+            background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+            border: 1px solid var(--border);
+            border-radius: 18px; padding: 22px; backdrop-filter: blur(4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,.25);
+            }
+        
+        header h1{ margin: 0 0 8px; font-weight: 700; font-size: clamp(22px, 3.6vw, 32px); letter-spacing: .2px; }
+        header p{ margin: 0; color: var(--muted); }
+        
+        
+        .grid{ display: grid; gap: 18px; }
+        @media (min-width: 820px){ .grid.two{ grid-template-columns: 1fr 1fr; } }
+        
+        
+        label{ display:block; font-weight:600; margin: 12px 0 6px; }
+        input[type="text"], input[type="date"], textarea, select{
+        width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--border);
+        background:#6d88be; color:var(--text); outline: none; transition: border .15s ease;
+        }
+        input:focus, textarea:focus, select:focus{ border-color: var(--brand); box-shadow: 0 0 0 3px rgba(96,165,250,.18); }
+        textarea{ min-height: 110px; resize: vertical; }
+        
+        
+        fieldset{ border:1px dashed var(--border); border-radius:14px; padding:14px 14px 8px; }
+        legend{ padding: 0 8px; color: var(--brand); font-weight:700; }
+        
+        
+        .helper{ color: var(--muted); font-size: 13px; margin-top: 6px; }
+        .badge{ display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; font-weight:700; }
+        .badge.ok{ background: rgba(34,197,94,.12); color: #86efac; border: 1px solid rgba(34,197,94,.35); }
+        .badge.err{ background: rgba(248,113,113,.12); color: #fecaca; border: 1px solid rgba(248,113,113,.35); }
+        
+        
+        .checks{ display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:10px 14px; margin-top:6px; }
+        .checks label{ display:flex; align-items:center; font-weight:500; gap:10px; margin:0; }
+        
+        
+        .actions{ display:flex; flex-wrap:wrap; gap:10px; padding-top: 10px; }
+        .actions button{
+        appearance:none; border:none; cursor:pointer; padding:12px 16px; border-radius:12px; font-weight:700;
+        color:#0b1220; background: var(--brand); transition: transform .04s ease, box-shadow .2s ease;
+        box-shadow: 0 8px 18px rgba(96,165,250,.25);
+        }
+        .actions button:hover{ transform: translateY(-1px); }
+        .actions button.secondary{ background: #9fbadf; color: var(--text); box-shadow:none; border:1px solid var(--border); }
+        .actions button.success{ background: var(--brand-2); box-shadow: 0 8px 18px rgba(52,211,153,.22); }
+        .actions .right{ margin-left:auto; }
+        
+        
+        .status{ margin-top: 10px; font-size: 14px; color: var(--muted); }
+        
+        
+        .visually-hidden{ position:absolute !important; height:1px; width:1px; overflow:hidden; clip: rect(1px,1px,1px,1px); white-space: nowrap; }
+        
+        
+        /* Print styles */
+        @media print{
+        body{ background:#d9b6b6; color:#000; }
+        .actions, #instructorToggleWrap{ display:none !important; }
+        .card{ box-shadow:none; border-color:#000; }
+        a[href]:after{ content: ""; }
+        }
+        </style>
+    </head>
+    <body>
+        <!-- place form here -->
+         <form>
+
+            <!-- Section 1: Confidence -->
+            <fieldset style="margin-top:16px">
+                <legend>Section 1 — Confidence & Preparedness</legend>
+                <label for="confidence" style="margin-top:0">Overall confidence performing this skill</label>
+                <select id="confidence" name="confidence" required>
+                <option value="" disabled selected>Choose 1 (low) to 5 (high)</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                </select>
+                
+                
+                <label for="comfortMost">What part felt most comfortable?</label>
+                <textarea id="comfortMost" name="comfortMost" class="with-counter" data-maxlength="600" placeholder="Briefly explain…"></textarea>
+                <div class="helper"></div>
+                
+                
+                <label for="comfortLeast">What part felt least comfortable?</label>
+                <textarea id="comfortLeast" name="comfortLeast" class="with-counter" data-maxlength="600" placeholder="Briefly explain…"></textarea>
+                <div class="helper"></div>
+                </fieldset>
+                
+                
+            <!-- Section 2: Steps Checklist -->
+                <fieldset style="margin-top:16px">
+                <legend>Section 2 — Steps of Medication Administration</legend>
+                <p class="helper">Check all steps you completed correctly.</p>
+                <div class="checks" id="stepsGroup">
+
+            <!-- Each checkbox id is used in the missed summary; text is the label -->
+                <label><input type="checkbox" name="steps" value="Verified provider order" /> Verified provider order</label>
+                <label><input type="checkbox" name="steps" value="Checked allergies" /> Checked allergies</label>
+                <label><input type="checkbox" name="steps" value="Performed hand hygiene" /> Performed hand hygiene</label>
+                <label><input type="checkbox" name="steps" value="Selected correct medication" /> Selected correct medication</label>
+                <label><input type="checkbox" name="steps" value="Verified 5 Rights (patient, medication, dose, route, time)" /> Verified <strong>5 Rights</strong> (patient, medication, dose, route, time)</label>
+                <label><input type="checkbox" name="steps" value="Checked expiration date" /> Checked expiration date</label>
+                <label><input type="checkbox" name="steps" value="Prepared medication safely" /> Prepared medication safely</label>
+                <label><input type="checkbox" name="steps" value="Used two patient identifiers" /> Used two patient identifiers</label>
+                <label><input type="checkbox" name="steps" value="Provided patient education" /> Provided patient education</label>
+                <label><input type="checkbox" name="steps" value="Administered medication correctly" /> Administered medication correctly</label>
+                <label><input type="checkbox" name="steps" value="Documented accurately" /> Documented accurately</label>
+                <br>
+                <br>
+                </div>
+                
+                
+                <label for="missedExplain" style="margin-top:10px">If any step was missed, explain why:</label>
+                <textarea id="missedExplain" name="missedExplain" class="with-counter" data-maxlength="700" placeholder="e.g., I hesitated on ID check; will verbalize and verify wristband next time…"></textarea>
+                <div class="helper"></div>
+                
+                
+                <div id="missedSummaryWrap" class="helper" aria-live="polite" style="margin-top:10px"></div>
+                </fieldset>
+                
+                
+            <!-- Section 3: Safety & Critical Thinking -->
+                <fieldset style="margin-top:16px">
+                <legend>Section 3 — Safety & Critical Thinking</legend>
+                <label for="safetyChecks">What safety checks did you use to prevent medication errors?</label>
+                <textarea id="safetyChecks" name="safetyChecks" class="with-counter" data-maxlength="700"></textarea>
+                <div class="helper"></div>
+                
+                
+                <label for="refusalNext">If the patient refused the medication, what would your next step be?</label>
+                <textarea id="refusalNext" name="refusalNext" class="with-counter" data-maxlength="600"></textarea>
+                <div class="helper"></div>
+                
+                
+                <label for="postError">How would you handle discovering an error after administration?</label>
+                <textarea id="postError" name="postError" class="with-counter" data-maxlength="700"></textarea>
+                <div class="helper"></div>
+                </fieldset>
+                
+
+            <!-- Section 5: Instructor Feedback (hidden until toggled) -->
+                <fieldset id="instructorSection" style="margin-top:16px" hidden>
+                <legend>Section 5 — Instructor Feedback</legend>
+                <div class="grid two">
+                <div>
+                <label for="strengths">Strengths observed</label>
+                <textarea id="strengths" name="strengths" class="with-counter" data-maxlength="600"></textarea>
+                <div class="helper"></div>
+                </div>
+                <div>
+                <label for="areasForGrowth">Areas for improvement</label>
+                <textarea id="areasForGrowth" name="areasForGrowth" class="with-counter" data-maxlength="600"></textarea>
+                <div class="helper"></div>
+                </div>
+                </div>
+                <div class="grid two">
+                <div>
+                <label for="overall">Overall performance (1–5)</label>
+                <select id="overall" name="overall">
+                <option value="" selected>—</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                </select>
+                </div>
+                <div>
+                <label for="instructorSig">Instructor signature (type name)</label>
+                <input id="instructorSig" name="instructorSig" type="text" placeholder="Type full name" />
+                </div>
+                </div>
+                </fieldset>
+        <br>
+        <!-- end form code -->
+            <button type="button" onclick="generatePDF()">Download PDF</button>
+        </form>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script>
+            async function generatePDF() {
+              const { jsPDF } = window.jspdf;
+              const doc = new jsPDF();
+          
+              const confidence     = document.getElementById("confidence").value;
+              const comfortMost    = document.getElementById("comfortMost").value;
+              const comfortLeast   = document.getElementById("comfortLeast").value;
+              const checkedSteps   = Array.from(document.querySelectorAll('input[name="steps"]:checked')).map(cb => cb.value);
+              const missedExplain  = document.getElementById("missedExplain").value;
+              const safetyChecks   = document.getElementById("safetyChecks").value;
+              const refusalNext    = document.getElementById("refusalNext").value;
+              const postError      = document.getElementById("postError").value;
+              const strengths      = document.getElementById("strengths")?.value || "";
+              const areasForGrowth = document.getElementById("areasForGrowth")?.value || "";
+              const timestamp      = new Date().toLocaleString();
+          
+              const x = 10;
+              const maxWidth = 180;
+              let y = 12;
+          
+              const ensurePage = (advance = 0) => {
+                if (y + advance > 280) { // simple page break guard
+                  doc.addPage();
+                  y = 12;
+                }
+              };
+          
+              const section = (title) => {
+                ensurePage(10);
+                doc.setFont(undefined, "bold");
+                doc.text(title, x, y);
+                y += 8;
+                doc.setFont(undefined, "normal");
+              };
+          
+              const field = (label, value) => {
+                ensurePage(10);
+                doc.setFont(undefined, "bold");
+                doc.text(label, x, y);
+                y += 6;
+                doc.setFont(undefined, "normal");
+                const lines = doc.splitTextToSize(value && value.trim() ? value : "—", maxWidth);
+                lines.forEach(line => {
+                  ensurePage(6);
+                  doc.text(line, x, y);
+                  y += 6;
+                });
+                y += 2;
+              };
+          
+              // Title
+              doc.setFont(undefined, "bold");
+              doc.text("Medication Administration Skill — Reflection & QA Form", x, y);
+              y += 10;
+              doc.setFont(undefined, "normal");
+          
+              // Section 1
+              section("Section 1 — Confidence & Preparedness");
+              field("Overall confidence (1–5)", confidence || "—");
+              field("Most comfortable part", comfortMost);
+              field("Least comfortable part", comfortLeast);
+          
+              // Section 2 — Steps (line-by-line, no duplicate legacy line)
+              section("Section 2 — Steps Completed");
+              if (checkedSteps.length === 0) {
+                field("Steps", "None selected");
+              } else {
+                checkedSteps.forEach(step => {
+                  const lines = doc.splitTextToSize(`• ${step}`, maxWidth);
+                  lines.forEach(line => {
+                    ensurePage(6);
+                    doc.text(line, x, y);
+                    y += 6;
+                  });
+                });
+                y += 2;
+              }
+              field("If any step was missed, why?", missedExplain);
+          
+              // Section 3
+              section("Section 3 — Safety & Critical Thinking");
+              field("Safety checks used", safetyChecks);
+              field("If patient refused, next step", refusalNext);
+              field("If error discovered post-admin, response", postError);
+          
+              // Instructor (optional if present)
+              if (strengths || areasForGrowth) {
+                section("Instructor Feedback");
+                field("Strengths observed", strengths);
+                field("Areas for improvement", areasForGrowth);
+              }
+          
+              // Footer
+              ensurePage(16);
+              doc.setFont(undefined, "bold");
+              doc.text("Please save this PDF and upload it.", x, y);
+              y += 8;
+              doc.setFont(undefined, "normal");
+              doc.text(`Document Submitted on: ${timestamp}`, x, y);
+          
+              doc.save("response.pdf");
+            }
+          </script>
+          
+        <br>
+        <small>Version 3</small>
+    </body>
+</html>
+
+  
